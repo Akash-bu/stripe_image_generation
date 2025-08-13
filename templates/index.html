@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Pay per image</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+        <script></script>
+    </head> 
+<body>
+    <header class="container">
+        <h1 class="app-title">Genarate an image (0.7€)</h1>
+    </header>
+    <main class="container">
+        {% if error %}<div class="alert">{{error}}</div>{% endif %}
+        {% if request.args.get('paid') and request.args.get('session_id') %}
+        <h2>Payment confirmed!</h2>
+        <form action="{{url_for('generate')}}" method="post">
+            <input type="hidden" name="session_id" value="{{request.srgs.get('session_id')}}">
+            <button type="submit">Generate</button>
+        </form>
+        {% else %}
+        <form class="row" action="{{url_for('pay')}}" method="post">
+            <input name="prompt" placeholder="Describe your image.." required>
+            <button type="submit">Pay</button>
+        </form>
+        {% endif %}
+        {% if image_url %}
+        <hr>
+        <h3>Result</h3>
+        <img src="{{image_url}}" class="preview" alt="Generated image">
+        <p><a class="btn" href="{{image_url}}" download>Download</a></p>
+        {% endif %}
+    </main>
+    <footer class="container foot">
+        <small>No user account required! Only 1 image per successful payment</small>
+    </footer>
+</body>
+</html>

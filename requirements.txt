@@ -1,0 +1,4 @@
+stripe
+openai
+flask
+python-dotenv
