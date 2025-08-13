@@ -4,3 +4,4 @@ User Interface
 
 ![](screenshots/ui1.png)
 
+Project partially halted due to stripe api issues. Will get back soon :)
